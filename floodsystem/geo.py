@@ -7,9 +7,9 @@
 geographical data.
 
 """
-from station import MonitoringStation
-from stationdata import build_station_list
-from utils import sorted_by_key  # noqa
+from .station import MonitoringStation
+from .stationdata import build_station_list
+from .utils import sorted_by_key  # noqa
 from haversine import haversine, Unit
 
 def stations_by_distance(stations, p):
