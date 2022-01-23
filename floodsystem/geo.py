@@ -7,3 +7,13 @@ geographical data.
 """
 
 from .utils import sorted_by_key  # noqa
+
+def rivers_with_station(stations):
+    """Build and return a set of all rivers with at least one station."""
+    
+    rivers = set()
+    for station in stations:
+        rivers.add(station.river)
+    
+
+    return rivers
