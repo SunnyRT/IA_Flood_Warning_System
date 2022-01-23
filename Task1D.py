@@ -1,4 +1,4 @@
-from floodsystem.geo import rivers_with_station
+from floodsystem.geo import rivers_with_station, stations_by_river
 from floodsystem.stationdata import build_station_list
 
 
@@ -12,8 +12,14 @@ def run():
     rivers = rivers_with_station(stations)
     
     print (len(rivers), " rivers have at least one station.")
-    
     print ("First 10 stations are: ", sorted(list(rivers))[:10])
+
+    river_stations_dict = stations_by_river(stations, rivers)
+    print ("Stations for River Aire: ", river_stations_dict["River Aire"])
+    print ("Stations for River Cam: ", river_stations_dict["River Cam"])
+    print ("Stations for River Thames: ", river_stations_dict["River Thames"])
+
+
 
             
 
