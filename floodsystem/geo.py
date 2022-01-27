@@ -78,6 +78,25 @@ def rivers_by_station_number(stations, N):
     return max_list
 
 
+def station_coordinates(stations):
+    """Build and return the lists of 
+    latitudes, longitudes and station names respectively"""
+    
+    latitudes = []
+    longitudes = []
+    texts = []
+
+    for station in stations:
+        latitudes.append(station.coord[0])
+        longitudes.append(station.coord[1])
+        texts.append(station.name)
+
+    return latitudes, longitudes, texts
+
+
+
+
+
 
 
     
