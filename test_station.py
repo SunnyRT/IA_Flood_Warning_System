@@ -3,7 +3,10 @@
 # SPDX-License-Identifier: MIT
 """Unit test for the station module"""
 
+from sqlalchemy import false
 from floodsystem.station import MonitoringStation
+from floodsystem.station import inconsistent_typical_range_stations
+from floodsystem.stationdata import build_station_list
 
 
 def test_create_monitoring_station():
@@ -49,3 +52,10 @@ def test_create_monitoring_station2():
     assert s.town == town
    
     assert s.typical_range_consistent() == False
+
+def test_inconsistent_stations():
+    """Effectively a repeat of Task 1F"""
+    stations = build_station_list()
+    inconsiststations = inconsistent_typical_range_stations(stations)
+    for i in inconsiststations:
+        assert i.typical_range_consistent() == False
