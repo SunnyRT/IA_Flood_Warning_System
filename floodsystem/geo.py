@@ -10,7 +10,6 @@ geographical data.
 # REMEMBER TO CHANGE to .utils WHEN COMPLETE
 
 from .utils import sorted_by_key  # noqa
-<<<<<<< HEAD
 from haversine import haversine, Unit
 
 def stations_by_distance(stations, p):
@@ -35,7 +34,6 @@ def stations_within_radius(stations, centre, r):
         if dist < r:
             stationlist.append(i)
     return stationlist
-=======
 
 def rivers_with_station(stations):
     """Build and return a set of all rivers 
@@ -129,4 +127,3 @@ def station_coordinates(stations):
 
 
     
->>>>>>> upstream
