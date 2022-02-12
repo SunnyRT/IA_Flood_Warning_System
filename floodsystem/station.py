@@ -49,7 +49,14 @@ class MonitoringStation:
                 return True
         else:
             return False
-            
+
+    # addition of task 2B
+    def relative_water_level(self):
+        """Return the latest water level as a function of the typical range.
+        i.e. a ratio of 1.0 corresponds to a level at the typical high
+        and a ratio of 0.0 corresponds to a level at the typical low."""
+        # TO BE CONTINUED    
+
 # addition of task 1F
 def inconsistent_typical_range_stations(stations):
     """Given list of stations, returns list of stations with inconsistent data"""
@@ -58,3 +65,4 @@ def inconsistent_typical_range_stations(stations):
         if i.typical_range_consistent() == False:
             inconsiststations.append(i)
     return inconsiststations
+
