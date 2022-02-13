@@ -55,7 +55,16 @@ class MonitoringStation:
         """Return the latest water level as a function of the typical range.
         i.e. a ratio of 1.0 corresponds to a level at the typical high
         and a ratio of 0.0 corresponds to a level at the typical low."""
-        # TO BE CONTINUED    
+        if self.typical_range_consistent() == True:
+            if type(self.latest_level) == float:
+                numerator = self.latest_level - self.typical_range[0]
+                denominator = self.typical_range[1] - self.typical_range[0]
+                ratio = numerator / denominator
+                # finds relative level by finding how far into the range
+                return ratio
+        else:
+            return None
+
 
 # addition of task 1F
 def inconsistent_typical_range_stations(stations):
