@@ -11,6 +11,13 @@ def plot_water_levels(station, dates, levels):
     level = levels
     plt.plot(t, level)
 
+    # Plot typical range low/high
+    typical_range = station.typical_range
+    low_level = float(typical_range[0])
+    high_level = float(typical_range[1])
+    plt.hlines(low_level, min(t), max(t), 'g', '-.')
+    plt.hlines(high_level, min(t), max(t), 'g', '-.')
+
     plt.xlabel("date")
     plt.ylabel("water level(m)")
     plt.xticks(rotation=45)
@@ -33,6 +40,13 @@ def plot_water_level_with_fit(station, dates, levels, p):
     # Plot polynomial fit 
     # Polynomial is evaluated using the shift x)
     plt.plot(x, poly(x-d0))
+
+    # Plot typical range low/high
+    typical_range = station.typical_range
+    low_level = float(typical_range[0])
+    high_level = float(typical_range[1])
+    plt.hlines(low_level, min(x), max(x), 'g', '-.')
+    plt.hlines(high_level, min(x), max(x), 'g', '-.')
 
     plt.xlabel("date")
     plt.ylabel("water level(m)")
