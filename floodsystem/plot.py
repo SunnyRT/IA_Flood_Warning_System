@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
+import matplotlib
+from floodsystem.analysis import polyfit
 
 def plot_water_levels(station, dates, levels):
     """Displays a plot of the water level data against time for a station, 
@@ -18,5 +20,26 @@ def plot_water_levels(station, dates, levels):
     plt.show()
 
 
+def plot_water_level_with_fit(station, dates, levels, p):
 
+    x = matplotlib.dates.date2num(dates)
+    y = levels
+    # Obtain the fitting polynomial ploy and shift of date (time) axis d0.
+    poly, d0 = polyfit(dates, levels, p)
+    
+    # Plot original data points
+    plt.plot(x, y, '.')
+
+    # Plot polynomial fit 
+    # Polynomial is evaluated using the shift x)
+    plt.plot(x, poly(x-d0))
+
+    plt.xlabel("date")
+    plt.ylabel("water level(m)")
+    plt.xticks(rotation=45)
+    plt.title(station)
+
+    # Display plot
+    plt.tight_layout()
+    plt.show()
 
