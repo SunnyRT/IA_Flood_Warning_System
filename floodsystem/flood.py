@@ -53,7 +53,8 @@ def station_risk(station):
     x = matplotlib.dates.date2num(dates)    
 
     # Predict future data for next 2 days
-    if polyfit(dates, levels, p = 4) != None:
+    if dates != [] and levels != []:
+
         poly, d0 = polyfit(dates, levels, p = 4)
         future_levels = poly(x - d0 + dt)
         combined_levels = levels + list(future_levels)
@@ -74,10 +75,12 @@ def station_risk(station):
         elif max(combined_levels) < 0:
             risk_rate = 0                    # low
 
-        else:
-            print("Data is not avaiable.")
-
         return (station.name, risk_rate)
+
+    else:
+        print("Data is not avaiable.")
+
+        
 
 
 
@@ -85,32 +88,25 @@ def town_risk(stations):
     """Return a sorted list of top 10 towns at the greatest risks.
     Criteria: Average of past-2-day history data and next-2-day future data."""
     town_dict = {}
+    dt = 2
     for station in stations:
-        if station.latest_level == None:
-            pass
-        else:
-            dt = 2
+        # Get history data for past 2 days
+        dates, levels = fetch_measure_levels(
+            station.measure_id, dt=datetime.timedelta(days=dt))
 
-            # Get history data for past 2 days
-            dates, levels = fetch_measure_levels(
-                station.measure_id, dt=datetime.timedelta(days=dt))
-            
-            x = matplotlib.dates.date2num(dates)    
-            levels = [i if type(i) == float else i[-1] for i in levels]
+        if dates != [] and levels != []:
+             
             # Predict future data for next 2 days
             poly, d0 = polyfit(dates, levels, p = 4)
-
-            if poly == None or d0 == None:
-                pass
             
-            else:
-                future_levels = poly(x[:10] - d0 + dt)
-                combined_levels = levels + list(future_levels)
+            x = matplotlib.dates.date2num(dates)
+            future_levels = poly(x[:10] - d0 + dt)
+            combined_levels = levels + list(future_levels)
 
-                # Compute risk index = average of past-2-day history data and next-2-day future data.
-                risk_index = average(combined_levels)
-                town_dict[station.town] = risk_index
-                print(risk_index)
+             # Compute risk index = average of past-2-day history data and next-2-day future data.
+            risk_index = average(combined_levels)
+            town_dict[station.town] = risk_index
+            print(risk_index)
 
     sorted_dict = sorted(town_dict.items(), key=lambda item: item[1], reverse = True)
     return sorted_dict[:5]

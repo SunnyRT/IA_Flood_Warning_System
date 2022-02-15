@@ -11,7 +11,14 @@ def run():
     # Update latest level data for all stations
     update_water_levels(stations)
 
-    print(town_risk(stations))
+    print(town_risk(stations[2000:len(stations)]))
+    #print(station_risk(stations[1030]))
+    #print(stations[589].latest_level)
+    
+    #dates, levels = fetch_measure_levels(
+        #stations[1030].measure_id, dt=datetime.timedelta(days=2))
+    #print(levels)
+    
     
 
 if __name__ == "__main__":
