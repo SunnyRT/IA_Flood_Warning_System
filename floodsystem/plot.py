@@ -35,11 +35,11 @@ def plot_water_level_with_fit(station, dates, levels, p):
     poly, d0 = polyfit(dates, levels, p)
     
     # Plot original data points
-    plt.plot(x, y, '.')
+    plt.plot(dates, y, '.')
 
     # Plot polynomial fit 
     # Polynomial is evaluated using the shift x)
-    plt.plot(x, poly(x-d0))
+    plt.plot(dates, poly(x-d0))
 
     # Plot typical range low/high
     typical_range = station.typical_range
