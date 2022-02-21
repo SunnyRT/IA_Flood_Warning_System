@@ -97,11 +97,11 @@ def town_risk(stations):
 
         if dates != [] and levels != []:
              
-            # Predict future data for next 2 days
+            # Predict future data for next 0.5 days
             poly, d0 = polyfit(dates, levels, p = 4)
             
             x = matplotlib.dates.date2num(dates)
-            future_levels = poly(x[:10] - d0 + dt)
+            future_levels = poly(x[:10] - d0 + 0.5)
             combined_levels = levels + list(future_levels)
 
              # Compute risk index = average of past-2-day history data and next-2-day future data.

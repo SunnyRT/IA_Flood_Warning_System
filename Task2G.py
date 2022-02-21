@@ -11,7 +11,7 @@ def run():
     # Update latest level data for all stations
     update_water_levels(stations)
 
-    print("The top 5 staions with highest risks: ", town_risk(stations[:5]))
+    print("The top 5 staions with highest risks: ", town_risk(stations[:10]))
     #print(station_risk(stations[1030]))
     #print(stations[589].latest_level)
     
