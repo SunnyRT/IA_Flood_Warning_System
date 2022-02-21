@@ -38,7 +38,8 @@ def stations_highest_rel_level(stations, N):
 
 
 
-
+# Combined with function town_risk(stations).
+'''
 # Addtion for Task2G
 def station_risk(station):
     """Rate the risk level of each station such that:
@@ -79,7 +80,7 @@ def station_risk(station):
 
     else:
         print("Data is not avaiable.")
-
+'''
         
 
 
@@ -106,7 +107,22 @@ def town_risk(stations):
              # Compute risk index = average of past-2-day history data and next-2-day future data.
             risk_index = average(combined_levels)
             town_dict[station.town] = risk_index
-            print(risk_index)
+            
+            risk = None
+        
+            if max(combined_levels) >= 2: # "severe" threshold
+                risk_rate = "severe"             # severe
+
+            elif max(combined_levels) >= 1:
+                risk_rate = "high"               # high
+
+            elif max(combined_levels) >= 0:
+                risk_rate = "moderate"           # moderate
+
+            elif max(combined_levels) < 0:
+                risk_rate = "low"                # low
+
+            print(station.name, ": ", risk_rate)
 
     sorted_dict = sorted(town_dict.items(), key=lambda item: item[1], reverse = True)
     return sorted_dict[:5]

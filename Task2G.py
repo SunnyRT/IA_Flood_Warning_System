@@ -1,4 +1,4 @@
-from floodsystem.flood import station_risk, town_risk
+from floodsystem.flood import town_risk
 from floodsystem.stationdata import build_station_list, update_water_levels
 from floodsystem.datafetcher import fetch_measure_levels
 import datetime
@@ -11,7 +11,7 @@ def run():
     # Update latest level data for all stations
     update_water_levels(stations)
 
-    print(town_risk(stations[:len(stations)]))
+    print("The top 5 staions with highest risks: ", town_risk(stations[:5]))
     #print(station_risk(stations[1030]))
     #print(stations[589].latest_level)
     
